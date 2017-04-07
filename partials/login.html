@@ -1,0 +1,85 @@
+    <!-- Welcome Page Start -->
+    <div class="wrapper bg-sm-white">
+    	<div class="container-fluid">
+        	<div class="login-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-login-box">
+                        	<div class="white-login-inner" ng-controller="LoginCtrl">
+                                <form name="loginform" novalidate autocomplete="off">
+                                    <div class="logo-big">
+                                        <a href="#/"/><img src="img/logo_white.png" alt=""></a> 
+                                    </div>
+                                    <h3 class="welcome-line" translate>Login</h3>
+                                    <div class="login-form-box">
+                                        <ul class="login-form-list">
+                                            <li>
+                                                <input type="text" style="display: none">
+                                                <input type="text" name="userID" placeholder="{{'ID Number'| translate}}" required ng-model="user.id" autocomplete="off"> <i class="fa fa-user icon-user" ></i>
+                                            	<div class="valid" ng-show="loginform.userID.$valid">
+                                            		<i class="fa fa-user icon-user"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="loginform.userID.$dirty && loginform.userID.$invalid">
+                                            		<span ng-show="loginform.userID.$error.required">
+                                            			<i class="fa fa-user icon-user"></i>
+                                            		</span>
+                                                    <span ng-show="loginform.userID.$error">
+                                                    	<i class="fa fa-user icon-user"></i>
+                                                    </span>
+                                            	</div>
+                                            </li>
+                                            <li>  <input type="password" style="display: none">
+                                                <input type="password" inputmode="numeric"  autocomplete="off" ng-minlength="6" ng-maxlength="12" name="userPWD" placeholder="{{'Enter your PIN' | translate}}" required ng-model="user.pin"> <i class="fa fa-lock icon-lock"></i>
+                                            	<div class="valid" ng-show="loginform.userPWD.$valid">
+                                            		<i class="fa fa-lock icon-lock"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="loginform.userPWD.$dirty && loginform.userPWD.$invalid">
+                                            		<span ng-show="loginform.userPWD.$error.required">
+                                            			<i class="fa fa-lock icon-lock"></i>
+                                            		</span>
+                                                    <span ng-show="loginform.userPWD.$error">
+                                                    	<i class="fa fa-lock icon-lock"></i>
+                                                    </span>
+                                            	</div>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="login-alert-box" ng-show="errorclass">
+                                    	<p class="login-danger"><i class="fa fa-warning"></i> {{errorMessage | translate}}</p>
+                                    </div>
+                                    <div class="login-btn-box"  ng-switch on="loginButtons">
+                                        <div ng-switch-when="submit">
+                                            <button type="submit" class="btn-red-big"  ng-disabled="loginform.$invalid" ng-click="login()" translate>Login</button><!--ng-show="LoginSubmit"-->
+                                        </div>
+
+                                        <!--<button type="button" ng-show="PinSubmit" class="btn btn-default" ng-click="PinCancelSwitch()">
+                                            <i class="fa fa-times"></i>
+                                        </button>-->
+
+                                       <div ng-switch-when="success">
+                                           <button type="button" class="btn-green-big mb15"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button><!-- ng-show="successSave"-->
+                                       </div>
+                                       <div ng-switch-when="loading"><!--ng-show="loadingPin"-->
+                                        <div class="loading mb15" >
+                                            <p><i class="fa fa-spinner fa-pulse"></i><span translate>Logging..</span></p>
+                                        </div>
+                                       </div>
+                                        <div ng-switch-when="saved">
+                                            <button type="button" class="btn-green-big mb15"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button> <!-- ng-show="successSave"-->
+                                        </div>
+                                        <a href="#/activate" class="btn-white-big" translate>Activate Account</a>
+                                    </div>
+                                    <div class="login-forget-pwd">
+                                    	<p><a href="#/pinreset" translate>Reset PIN ?</a></p>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Welcome Page End -->

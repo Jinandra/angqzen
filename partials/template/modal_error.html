@@ -1,0 +1,27 @@
+            <div class="app-content">
+                <div class="error-status-box">
+                    <div class="pass-heading-box error-heading-box">
+                        <div class="pass-heading">
+                            <h2><i class="fa fa-warning"></i> {{errorStatus}}</h2>
+                        </div>
+                        <div class="modal-btn-box">
+                            <button type="button" class="modal-btn-close" ng-click="cancel()"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="pwd-form-box white-box">
+                    	<!--<div class="server-loading-img"  ng-show="errorButton!='Understand'">
+                        	<img src="img/server_loading.gif" alt="">
+                        </div>-->
+                        <div class="server-loading-img">
+                        	<img src="img/server_loading.gif" alt="">
+                        </div>
+                        <p>{{errorMessage}}</p>
+                        <button type="button" class="btn-red-big" ng-click="ok()" ng-show="errorButton=='Understand'" translate>OK, UNDERSTAND</button>
+                        <!--<button type="button" class="btn-black" ng-click="ok()">Cancel</button>-->
+                    </div>
+                </div>  
+                <div class="clearfix"></div>  
+            </div>
+
+            <div id="page-loading" ng-controller="Loadify"></div>
+

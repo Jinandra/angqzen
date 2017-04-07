@@ -1,0 +1,127 @@
+	<!-- Header Start -->
+	<div class="wrapper header-bg header-fixed">
+    	<header>
+            <div class="container-fluid">
+                <div class="row">
+                	<div class="top-notify-box">
+                    	<ul class="top-notify-list">
+                        	<li><a href="#/support"><i class="fa fa-support"></i> <span translate>Support</span></a></li>
+                            <li><a href="#/{{store[3]}}"  ng-click="logOut()"><i class="fa fa-sign-out"></i> <span translate>Logout</span></a></li>
+                        </ul>
+                    </div>
+                	<div class="col-sm-4 col-md-5 loan-heading">
+                    	<a href="#/home" class="btn-page-back"><i class="fa fa-chevron-left"></i></a>
+                    	<h2>{{loanstatus.vehicle}}</h2>
+                    </div>
+                    <div class="col-sm-2 header-logo" ng-controller="LoginCtrl">
+                    	<a href="{{universalnavigation}}#/home"><img src="img/logo_white.png" alt="Logo"></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+        <div class="header-tab-list-box">
+        	<ul class="header-tab-list">
+            	<li class="selected"><a href="#/loanstatus"><i class="fa fa-check-circle-o"></i> <span translate>Status</span></a></li>
+                <li><a href="#/participants"><i class="fa fa-user"></i> <span translate>PARTICIPANTS</span></a></li>
+                <li><a href="#/payments"><i class="fa fa-university"></i> <span translate>PAYMENTS</span></a></li>
+                <li><a href="#/documents"><i class="fa fa-file-text-o"></i> <span translate>DOCUMENTS</span></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Header End -->
+    
+    <!-- Loan Status Page Start -->
+    <div class="wrapper header-mt120">
+    	<div class="container-fluid">
+        	<div class="loan-wapper">
+                <div class="row">
+                    <div class="col-sm-12 col-md-9">
+                        <div class="loan-status-box">
+                            <div class="loan-status-heading">
+                                <h2>{{'Loan Status'|translate}}
+                                <span>{{loanstatus.condition}} - {{loanstatus.contractid}}</span>
+                                </h2>
+                            </div>
+                            <div class="loan-payment-graph-box">
+                                <agile-loanchart ></agile-loanchart>
+                                
+                                <div class="col-md-3 col-lg-4 loan-payment-progress">
+                                    <div ang:round:progress 
+                                    	data-round-progress-model="roundProgressData"
+                                        data-round-progress-width="500"
+                                        data-round-progress-height="500"
+                                        data-round-progress-outer-circle-width="100"
+                                        data-round-progress-inner-circle-width="0"
+                                        data-round-progress-outer-circle-radius="200"
+                                        data-round-progress-inner-circle-radius="270"
+                                        data-round-progress-label-font="130px Roboto"
+                                        data-round-progress-outer-circle-background-color="#e6e6e6"
+                                        data-round-progress-outer-circle-foreground-color="#80c784"
+                                        data-round-progress-inner-circle-color="#fff"
+                                        data-round-progress-label-color="#000">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                               
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="loan-payment-status-box">
+                                <div class="loan-payment-status">
+                                    <p translate>Instalment</p>
+                                    <h3>{{loanstatus.amountvalue}}</h3>
+                                </div>
+                                <div class="loan-payment-status">
+                                    <p translate>Term</p>
+                                    <h3>{{loanstatus.paidinstallemt}}/{{loanstatus.totalinstallemt}}</h3>
+                                </div>
+                                
+                                <div class="loan-payment-status">
+                                    <p translate>Balance</p>
+                                    <h3>{{loanstatus.pendingvalue}}</h3>
+                                </div>
+                                <div class="loan-payment-status bdr0-sm">
+                                    <p translate>Paid</p>
+                                    <h3>{{loanstatus.paidvalue}}</h3>
+                                </div>
+                                <div class="loan-payment-status last">
+                                    <p translate>Rate</p>
+                                    <h3>{{loanstatus.termrate}}%</h3>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-3" >
+                        <div class="loan-nxt-rpt-box">
+                            <div class="loan-nxt-rpt-heading">
+                                <h2 translate>Next receipt</h2>
+                            </div>
+                            <div class="loan-nxt-rpt-cover">
+                                <div class="loan-nxt-rpt-date-box">
+                                    <div class="loan-nxt-rpt-date">
+                                        <div class="loan-month">
+                                            <h3>{{loanstatus.nextreceiptmonth}}</h3>
+                                        </div>
+                                        <div class="loan-date">
+                                            <h1>{{loanstatus.nextreceiptdate}}<span>{{loanstatus.nextreceiptday}}</span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="loan-nxt-rpt-amt-box">
+                                    <div class="loan-amt-bg">
+                                        <p translate>Instalment Amount</p>
+                                        <h3>{{loanstatus.amountvalue}}</h3>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,54 @@
+    <!-- Welcome Page Start -->
+    <div class="wrapper bg-sm-white">
+    	<div class="container-fluid">
+        	<div class="login-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-login-box">
+                        	<div class="white-login-inner">
+                                <form name="savedUser"  autocomplete="off">
+                                    <div class="logo-big">
+                                        <a href="#/"><img src="img/logo_white.png" alt=""></a> 
+                                    </div>
+                                    <h3 class="welcome-line" translate>Welcome to Customer Platform</h3>
+                                    <div class="welocme-img-box">
+                                        <div class="usered-circle-box">
+                                            <img ng-if="store[2]" ng-src="data:image/png;base64, {{store[2]}}" alt="">
+                                            <img ng-if="!store[2]" src="img/avtar_profile.png" alt="Photo" width="192">
+                                        </div>
+                                        <h3>{{store[0]}}</h3>
+                                    </div>
+                                    <div class="login-form-box">
+                                        <ul class="login-form-list user-saved-list">
+                                        <li> <input type="password" style="display: none">
+                                            <input type="password" placeholder="{{'Enter Pin'|translate}}" ng-minlength="6" ng-maxlength="12" required ng-model="savedUser.pin" autocomplete="off"></li>
+                                        <li><input type="hidden" ng-model="savedUser.id" value="{{store[1]}}"></li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="login-btn-box" ng-switch on="savedUserBtn">
+                                    <div class="login-alert-box" ng-show="errorclass">
+                                    	<p class="login-danger"><i class="fa fa-warning"></i> {{errorMessage | translate}}</p>
+                                    </div>
+                                       <div ng-switch-when="login">
+                                           <button type="submit" class="btn-red-big" ng-disabled="savedUser.$invalid" ng-click="savedUserLogin()" translate>Login</button>
+                                       </div>
+                                        <div class="loading mb15" ng-switch-when="loading">
+                                            <p><i class="fa fa-spinner fa-pulse"></i><span translate>Logging..</span></p>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="login-btn-box">
+                                	<button type="button"class="btn-white-big" ng-click="clearStore()">{{'I’m not'|translate}}  {{store[0]}}</button>
+                                </div>	
+                                <div class="login-forget-pwd">
+                                    <p><a href="#/pinreset" translate>Reset PIN ?</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Welcome Page End -->

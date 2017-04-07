@@ -1,0 +1,104 @@
+
+	<!-- Header Start -->
+	<div class="wrapper header-bg header-fixed">
+    	<header>
+            <div class="container-fluid" ng-controller="LoginCtrl">
+                <div class="row">
+                	<div class="top-notify-box">
+                    	<ul class="top-notify-list">
+                            <li><a href="#/{{store[3]}}"  ng-click="logOut()"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                        </ul>
+                    </div>
+                	<div class="col-sm-5 loan-heading">
+                    	<a href="javascript:history.go(-2)" class="btn-page-back"><i class="fa fa-chevron-left"></i></a>
+                    	<h2>Contact / Support</h2>
+                    </div>
+                    <div class="col-sm-2 header-logo">
+                    	<a href="{{universalnavigation}}#/home"><img src="img/logo_white.png" alt="Logo"></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+        <div class="header-tab-list-box contact-tab">
+        	<ul class="header-tab-list">
+            	<li><a href="#/support">IN APP CONTACT</a></li>
+                <li class="selected"><a href="#/contact-mail">MAIL / PHONE</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Header End -->
+    
+    <!-- Loan Status Page Start -->
+    <div class="wrapper header-cont-mt75">
+    	<div class="container-fluid">
+        	<div class="loan-wapper">
+                <div class="row">
+                	<div class="col-sm-7 col-lg-5 col-md-offset-1 col-lg-offset-2 hidden-xs">
+                        <div class="contact-app-box">
+                        	<div class="contact-app-heading hidden-xs">
+                            	<h2>Contact Form</h2>
+                            </div>
+                            <div class="contact-app-in" ng-controller="ContactAppCtrl">
+                                <form name="contactApp" novalidate>
+                                    <div class="contact-app-fildes">
+                                        <p>Contact reason</p>
+                                        <select ng-repeat="selection in selections" name="contactApp.selection" ng-model="selection" ng-options="i.id as i.name for i in reasons">
+                                            <option value="">Choose</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="contact-app-fildes">
+                                        <p>Your message</p>	
+                                        <textarea placeholder="Type message" name="contactApp.textarea" ng-model="textarea" required></textarea>
+                                    </div>
+                                    <div class="contact-app-fildes">
+                                        <button type="submit" class="btn-red" ng-click="EmailSendStatus()" ng-disabled="editpayment.$invalid"> SEND <i class="fa fa-envelope"></i></button>
+                                        <button type="button" class="btn-green-big btn-h40" ng-show="successSend"><i class="fa fa-check-circle"></i>SAVED!</button>
+                                        <div class="loading loading-alert loading-h40" ng-show="loadingEmail">
+                                        	<p><i class="fa fa-spinner fa-pulse"></i> Sending mail</p>
+                                        </div>
+                                        <div class="edit-payment-error-alert btn-h40" ng-show="errorEmail">
+                                            <p><i class="fa fa-warning"></i> Error mail sending</p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-5 col-md-4 col-lg-3">
+                        <div class="contact-email-box white-box">
+                        	<form>
+                                <div class="contact-email-fildes">
+                                	<p class="contact-light"><i class="fa fa-envelope"></i>By e-mail:</p>
+                                    <p><a href="mailto:{{contact.ContactEmail}}">{{contact.ContactEmail}}</a></p>
+                                </div>
+                                <div class="contact-email-btn">
+                                    <a href="mailto:{{contact.ContactEmail}}" class="btn-red">OPEN E-MAIL APP<i class="fa fa-envelope"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="contact-email-box white-box">
+                        	<form>
+                                <div class="contact-email-fildes">
+                                	<p class="contact-light"><i class="fa fa-mobile"></i>By phone:</p>
+                                    <p><a href="tel:{{contact.ContactPhone}}">{{contact.ContactPhone}}</a></p>
+                                    <!--<p>Office hours from <strong>9 am</strong> to <strong>5 pm</strong></p>-->
+                                    <p>{{contact.ContactCalendar}}</p>
+                                </div>
+                                <div class="contact-email-btn">
+                                    <a href="tel:{{contact.ContactPhone}}" class="btn-red">CALL NOW <i class="fa fa-phone"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  

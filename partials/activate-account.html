@@ -1,0 +1,121 @@
+    <!-- Welcome Page Start -->      
+    <div class="wrapper bg-sm-white">
+    	<div class="container-fluid">
+        	<div class="login-wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-login-box">
+                        	<div class="white-login-inner" ng-controller="ActivateCtrl as actvctrl">
+                                <form name="activateaccount" ng-submit="actvctrl.activate()" novalidate>
+                                    <div class="logo-big">
+                                        <a href="#/"><img src="img/logo_white.png" alt=""></a> 
+                                    </div>
+                                    <h3 class="welcome-line" translate>Activate Account</h3>
+                                    <div class="login-form-box">
+                                        <ul class="login-form-list">
+                                            <li><input type="text" maxlength="20" ng-maxlength="20" placeholder="{{'ID Number'|translate}}" required ng-model="actvctrl.newuser.secondaryid" name="id"><i class="fa fa-user icon-user"></i>
+                                            	<div class="valid" ng-show="activateaccount.id.$valid">
+                                            		<i class="fa fa-user icon-user"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="activateaccount.id.$dirty && activateaccount.id.$invalid">
+                                            		<span ng-show="activateaccount.id.$error.required">
+                                            			<i class="fa fa-user icon-user"></i>
+                                            		</span>
+                                                    <span ng-show="activateaccount.id.$error">
+                                                    	<i class="fa fa-user icon-user"></i>
+                                                    </span>
+                                            	</div>
+                                            </li>
+                                            <li>
+                                                <input type="text" name="datepick"  data-ui-mask={{mask}} ng-pattern='/^(([0-2]?\d{1})|([3][0,1]{1}))\/(0?[1-9]|1[012])\/(([1|2]{1}[0-9]{1}[0-9]{1}\d{1}))$/'
+                                                       data-ng-attr-placeholder="{{placeholder || 'Date of Birth' | translate}}" required ng-model="actvctrl.newuser.dob" ng-focus="focus()" ng-blur="blur()" data-dob-placeholder clean-view-value/>
+                                                     <i class="fa fa-calendar"></i>
+                                                <div class="valid ng-hide" ng-show="activateaccount.datepick.$valid">
+                                            		<i class="fa fa-calendar"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="activateaccount.datepick.$dirty && activateaccount.datepick.$invalid">
+                                            		<span ng-show="activateaccount.datepick.$error.required">
+                                            			<i class="fa fa-calendar"></i>
+                                            		</span>
+                                                    <span ng-show="activateaccount.datepick.$error">
+                                                    	<i class="fa fa-calendar"></i>
+                                                    </span>
+                                            	</div> 
+                                            </li>
+                                            <li>
+                                                <!--<input type="text" numbers-only="numbers-only" maxlength="20" ng-maxlength="20" placeholder="Mobile Phone" name="phone" required ng-model="actvctrl.newuser.phone"> [0-9]{1,7}-->
+                                              <!--<input type="text" international-phone-number name="mobile" id="mobile" ng-model="actvctrl.newuser.mobile" auto-hide-dial-code="false" required only-countries="es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, in, pk, br" default-country="auto" preferred-countries="">-->
+                                              	
+
+                                                	<input type='text' name="mobile" ng-model="actvctrl.newuser.mobile" data-ng-attr-placeholder="{{mobNumbplaceholder || 'Mobile Phone' | translate}}" required ng-focus="focused=true" ng-hide="focused" data-mob-number-placeholder id="mobile-focus-out" class="mobile-focus-out" />
+                                                <div ng-show="focused">
+                                                    <input type="text" class="phone-number"  international-phone-number name="phone" ng-model="actvctrl.newuser.mobile" full-phone-number="fullPhoneNumber" ng-click="focused=true" id="phone" required only-countries="ca, es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, in, pk, br, at" default-country="auto" preferred-countries="es, pt, at, gb" ng-show="focused" focus-me="focused">
+                                                </div>
+                                                
+                                                 <!--<input type='text' name="mobile" mobile-input ng-model="actvctrl.newuser.mobile" data-ng-attr-placeholder="{{mobNumbplaceholder || 'Mobile Phone' | translate}}" required ng-focus="focus2()" ng-blur="blur2()" data-mob-number-placeholder />-->
+                                                <!--pointer-events:none;-->
+                                                <i class="fa fa-mobile icon-mobile"></i>
+                                            	<div class="valid" ng-show="activateaccount.phone.$valid">
+                                            		<i class="fa fa-mobile icon-mobile"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="activateaccount.phone.$dirty && activateaccount.phone.$invalid">
+                                            		<span ng-show="activateaccount.phone.$error.required">
+                                            			<i class="fa fa-mobile icon-mobile"></i>
+                                            		</span>
+                                                    <span ng-show="activateaccount.phone.$error">
+                                                    	<i class="fa fa-mobile icon-mobile"></i>
+                                                    </span>
+                                            	</div>
+                                            </li>
+                                            <li><input type="email" name="email" ng-model="actvctrl.newuser.email" maxlength="100" ng-maxlength="100" placeholder="{{'E - Mail' | translate}}" required>
+                                            	<i class="fa fa-envelope icon-envelope"></i>
+                                            	<div class="valid" ng-show="activateaccount.email.$valid">
+                                            		<i class="fa fa-envelope icon-envelope"></i>
+                                            	</div>
+                                            	<div class="error" ng-show="activateaccount.email.$dirty && activateaccount.email.$invalid">
+                                            		<span ng-show="activateaccount.email.$error.required">
+                                            			<i class="fa fa-envelope icon-envelope"></i>
+                                            		</span>
+                                                    <span ng-show="activateaccount.email.$error.email">
+                                                    	<i class="fa fa-envelope icon-envelope"></i>
+                                                    </span>
+                                            	</div>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="login-alert-box" ng-show="errorclass" >
+                                        <p class="login-danger" >
+                                            <i class="fa fa-warning"></i> <span translate>This Id is already in use. Do you want to <a href='#/login' translate>log in </a>instead?</span>
+                                        </p>
+                                    </div>
+                                    <div class="login-alert-box" ng-show="confirmAccountMessage" >
+                                        <p class="login-danger" >
+                                            <i class="fa fa-warning"></i> <span translate>{{confirmAccountMessage}}</span>
+                                        </p>
+                                    </div>
+
+                                    <div class="login-alert-box" ng-show="errorclassemail">
+                                        <p class="login-danger">
+                                            <i class="fa fa-warning"></i> {{errorMessage | translate}}
+                                        </p>
+                                    </div>
+                                    <div class="login-btn-box" ng-switch on="activateBtn">
+                                       <div ng-switch-when="submit"> <button type="submit" class="btn-red-big"  ng-disabled="activateaccount.$invalid" translate>Send Activation</button></div>
+
+                                        <div ng-switch-when="success"><button type="button" class="btn-green-big mb15"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button></div>
+                                        <div class="loading mb15" ng-switch-when="loading">
+                                            <p><i class="fa fa-spinner fa-pulse"></i><span translate>Activating..</span></p>
+                                        </div>
+                                        <a href="#/login" class="btn-white-big" translate>Cancel</a>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

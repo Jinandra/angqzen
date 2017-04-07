@@ -1,0 +1,69 @@
+	<!-- Header Start -->
+	<div class="wrapper header-bg header-fixed">
+    	<header>
+            <div class="container-fluid">
+                <div class="row">
+                	<div class="top-notify-box">
+                    	<ul class="top-notify-list">
+                        	<li ><a href="#/support"><i class="fa fa-support"></i> <span translate>Support</span></a></li>
+           
+                            <li ><a href="#/{{store[3]}}"  ng-click="logOut()"><i class="fa fa-sign-out"></i> <span translate>Logout</span></a></li>
+                        </ul>
+                    </div>
+                	<div class="col-sm-4 col-md-5 loan-heading" ng-controller="LoginCtrl">
+                    	<h2>{{store[0]}} - <span  translate>Your Loans</span></h2>
+                    </div>
+                    <div class="col-sm-2 header-logo">
+                    	<a href="{{universalnavigation}}#/home"><img src="img/logo_white.png" alt="Logo"></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- Header End -->
+    
+    <!-- Home Page Start -->
+    <div class="wrapper header-mt75">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-sm-6 " ng-repeat="userloanhome in userloanhomes" ng-class="{'home-single-loan' : userloanhomes.length==1}">
+                	<div class="home-conditional-box">
+                    	<div class="h-condi-heading">
+                        	<h2>{{userloanhome.vehicle}} 
+                            	<span>{{userloanhome.condition}} - {{userloanhome.contractid}}</span>
+                            </h2>
+                        </div>
+                        <div class="h-condi-progress"> 
+                            <div class="progbar" ng-controller="ProgressCtrl">
+                                <progressbar class="progress active" animate="true" max="100" value="progressValue" type="success"><i><span count-to="{{userloanhome.Percent}}" duration="1" count-from="{{countFrom}}">{{progressValue}}</span>%</i></progressbar>
+                            </div>
+                        </div>
+                        <div class="h-condi-status-box">
+                        	<div class="h-condi-status">
+                            	<p translate>Instalment</p>
+                                <h3>{{userloanhome.amountvalue}}</h3>
+                            </div>
+                            <div class="h-condi-status">
+                            	<p translate>Balance</p>
+                                <h3>{{userloanhome.pendingvalue}}</h3>
+                            </div>
+                            <div class="h-condi-status bdr0-sm">
+                            	<p translate>Term</p>
+                                <h3>{{userloanhome.paidinstallemt}}/{{userloanhome.totalinstallemt}}</h3>
+                            </div>
+                            <div class="h-condi-status last">
+                            	<p translate>Rate</p>
+                                <h3>{{userloanhome.termrate}}%</h3>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="h-condi-detail">
+                            <a href="#/loanstatus" ng-click="selectLoan(userloanhome.contractid, userloanhome.vehicle)" ><span translate>DETAILS</span> <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Home Page End -->

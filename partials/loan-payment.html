@@ -1,0 +1,245 @@
+	<!-- Header Start -->
+	<div class="wrapper header-bg header-fixed">
+    	<header>
+            <div class="container-fluid">
+                <div class="row">
+                	<div class="top-notify-box">
+                    	<ul class="top-notify-list" ng-controller="LoginCtrl">
+                        	<li><a href="#/support"><i class="fa fa-support"></i> <span translate>Support</span></a></li>
+                            <li><a href="#/{{store[3]}}" ng-click="logOut()"><i class="fa fa-sign-out"></i> <span translate>Logout</span></a></li>
+                        </ul>
+                    </div>
+                	<div class="col-sm-4 col-md-5 loan-heading">
+                    	<a href="#/home" class="btn-page-back"><i class="fa fa-chevron-left"></i></a>
+                    	<h2>{{loanstatus.vehicle}}</h2>
+                    </div>
+                    <div class="col-sm-2 header-logo" >
+                    	<a href="{{universalnavigation}}#/home"><img src="img/logo_white.png" alt="Logo"></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+        <div class="header-tab-list-box">
+        	<ul class="header-tab-list">
+            	<li><a href="#/loanstatus"><i class="fa fa-check-circle-o"></i> <span translate>Status</span></a></li>
+                <li><a href="#/participants"><i class="fa fa-user"></i> <span translate>PARTICIPANTS</span></a></li>
+                <li class="selected"><a href="#/payments"><i class="fa fa-university"></i> <span translate>PAYMENTS</span></a></li>
+                <li><a href="#/documents"><i class="fa fa-file-text-o"></i> <span translate>DOCUMENTS</span></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Header End -->
+    
+    <!-- Loan Status Page Start -->
+    <div class="wrapper header-mt120">
+    	<div class="container-fluid">
+        	<div class="loan-wapper">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4 col-lg-offset-2" ng-controller="BankAccCtrl as bac">
+                        <div class="loan-payment-box white-box" ng-hide="editBox">
+                            <div class="loan-document-heading">
+                                <h2 translate>Payment Details</h2>
+                            </div>
+                            <div class="payment-meth-box">
+                            	
+                                <div class="payment-icon-box">
+                                	<i class="fa fa-university"></i>
+                                </div>
+                                <!--<div class="payment-meth">
+                                	<p>Santander Consumer Bank</p>
+									<p class="payment-light">{{loanstatus.bankaddress}}</p>
+                                    <p class="payment-light" ng-show="AccountCode">**** **** **** **** {{bac.details.id.slice( 20 )}}</p>
+                                </div>-->
+                                <div class="payment-meth">
+                                	<p translate>Direct Debit</p>
+									<!--<p class="payment-light" ng-hide="AccountCode"><span translate>Account</span>: **** **** **** **** {{bankDetails}}</p>
+                                    <p class="payment-light" ng-show="AccountCode"><span translate>Account</span>: **** **** **** **** {{bac.details.id.slice(-4)}}</p>-->
+                                    
+                                    <p class="payment-light" ng-hide="AccountCode"><span translate>Account</span> : {{bankDetails}}</p>
+                                    <p class="payment-light" ng-show="AccountCode"><span translate>Account</span> : {{bac.details.id.slice(-4)}}</p>
+                                    
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="payment-edit-btn-box">
+                            	<div class="payment-edit-btn-in">
+                                    <!--<button class="btn-red-text pull-right pd0" ng-click="OpenEditBox()" ng-show="paymetEditBTN"><span translate>CHANGE BANK ACCOUNT</span><i class="fa fa-pencil"></i></button>-->
+                                    <!--<button type="submit" ng-show="confirmBTN" class="btn-red pull-right" ng-click="ConfirmChanges()">Confirm</button>-->
+                                    <!--<button type="button" class="btn-green-big btn-h40" ng-show="success"><i class="fa fa-check-circle"></i>SAVED!</button>-->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="loan-payment-box white-box" ng-show="editBox">
+                            <div class="loan-document-heading">
+                                <h2 translate>New bank account</h2>
+                            </div>
+                            <div class="payment-meth-box">
+                            	<form name="editpayment" ng-submit="bac.checkacc()" novalidate>
+                                    <ul class="payment-meth-list">
+                                        <li>
+                                            <input type="text" name="account"  ng-model="bac.details.id" placeholder="{{'Enter digits here' | translate}}" numbers-only="numbers-only" ng-click="switchEditPayment()" required><!--maxlength="24" ng-maxlength="24" ng-minlength="24"-->
+                                            <i class="fa fa-university"></i>
+                                            <div class="valid" ng-show="editpayment.account.$valid">
+                                                <i class="fa fa-university"></i>
+                                            </div>
+                                            <div class="error" ng-show="editpayment.account.$dirty && editpayment.account.$invalid">
+                                                <span ng-show="editpayment.account.$error.required">
+                                                    <i class="fa fa-university"></i>
+                                                </span>
+                                                <span ng-show="editpayment.account.$error">
+                                                    <i class="fa fa-university"></i>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="payment-edit-btn" ng-switch on="changeBank">
+                                    	<div ng-switch-when="edit"><!--ng-hide="accept"-->
+                                            <button type="button" ng-click="CancelEditBox()"  class="btn-red-text pull-left" translate>Cancel</button>
+                                            <button type="button"  class="btn-graye" translate>Save</button>
+                                        </div>
+                                        <div ng-switch-when="accept"><!-- ng-show="accept"-->
+                                            <button type="submit"  class="btn-red" ng-disabled="editpayment.$invalid" translate>Accept</button>
+                                        </div>
+                                        <div ng-switch-when="success"><!--ng-show="success"-->
+                                            <button type="button" class="btn-green-big btn-h40"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button>
+                                        </div>
+                                        <div ng-switch-when="loading"><!--ng-show="loading"-->
+                                            <div class="loading loading-h40" >
+                                                <p><i class="fa fa-spinner fa-pulse"></i> <span translate>Checking account number</span></p>
+                                            </div>
+                                        </div>
+                                        <div ng-switch-when="error"><!--ng-show="error"-->
+                                            <div class="edit-payment-error-alert  btn-h40" ng-click="CancelEditBox()" translate>
+                                                <p><i class="fa fa-warning"></i> <span translate>Incorrect account number</span></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="loan-payment-box white-box">
+                            <div class="payment-history-heading">
+                                <h2 translate>Payment history</h2>
+                            </div>
+                            <div class="payment-history-box">
+                                <div class="payment-history-menu-box">
+                                	<ul class="payment-tabs">
+                                    	<li ng-repeat="TabsCtrl in TabsCtrls" ng-class="{active:isActiveTab(TabsCtrl.url)}" ng-click="onClickTab(TabsCtrl)" disabled="{{TabsCtrl.disabled}}">{{TabsCtrl.All | translate}}<span>{{TabsCtrl.allvalue}}</span></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div id="mainView">
+                                    <div ng-include="currentTab"></div>
+                                </div>
+                                <script type="text/ng-template" id="one.tpl.html">
+								<div>
+									<div class="payment-history-list-box" ng-class="class">
+										<ul class="payment-history-list" ng-class="class">
+											<li ng-repeat="detail in quickfix.PaymentsItem | limitTo:limit">
+												<div class="payment-history-detail">
+													<p>
+														<i class="fa fa-clock-o" ng-class="{
+'payment-panding':detail.Status==0,
+'payment-success':detail.Status==1,
+'payment-not-paid':detail.Status==2
+												}"></i> 
+														<span class="payment-no">{{detail.InstallmentID}}</span>
+														<span class="payment-date">
+															<time title="{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' }}">{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' }}</time></span>
+														<span class="payment-amt">{{detail.Installment }}</span><!--| currency:"£ ":0-->
+														
+													</p>
+													<div class="clearfix"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								  </div>
+									<div class="payment-full-history-btn">
+										<a href="" ng-click="changeClass()">{{showhidetext | translate}} <i class="fa fa-arrow-right"></i></a>
+										<div class="clearfix"></div>
+									</div>
+	  							</script>
+                                
+                                <script type="text/ng-template" id="two.tpl.html">
+									<div>
+									  <div  class="payment-history-list-box" ng-class="class">
+										<ul class="payment-history-list" ng-class="class">
+											<li ng-repeat="detail in quickfix.PaymentsItem |filter: {Status:1} | limitTo:limit">
+												<div class="payment-history-detail">
+													<p>
+														<i class="fa fa-clock-o" ng-class="{
+'payment-panding':detail.Status==0,
+'payment-success':detail.Status==1,
+'payment-not-paid':detail.Status==2
+												}"></i> 
+														<span class="payment-no">{{detail.InstallmentID}}</span>
+														<span class="payment-date">
+															<time title="{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' | translate }}">{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' | translate}}</time>
+														</span>
+														<span class="payment-amt">{{detail.Installment }}</span><!--| currency:"£ ":0-->
+														
+													</p>
+													<div class="clearfix"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="payment-full-history-btn">
+										<a href="" ng-click="changeClass()">{{showhidetext | translate}} <i class="fa fa-arrow-right"></i></a>
+										<div class="clearfix"></div>
+									</div>
+                                        </div>
+	  							</script>
+                                
+                                <script type="text/ng-template" id="three.tpl.html">
+								<div>
+									<div  class="payment-history-list-box">
+										<ul class="payment-history-list" ng-class="class">
+											<li ng-repeat="detail in quickfix.PaymentsItem |filter: {Status:0} | limitTo:limit">
+												<div class="payment-history-detail">
+													<p>
+														<i class="fa fa-clock-o" ng-class="{
+'payment-panding':detail.Status==0,
+'payment-success':detail.Status==1,
+'payment-not-paid':detail.Status==2
+												}"></i> 
+														<span class="payment-no">{{detail.InstallmentID}}</span>
+														<span class="payment-date">
+															<time title="{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' }}">{{ detail.InstallmentDate | amDateFormat: 'Do MMM YYYY' }}</time>
+														</span>
+														<span class="payment-amt">{{detail.Installment }}</span><!--| currency:"£ ":0-->
+														
+													</p>
+													<div class="clearfix"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="payment-full-history-btn">
+										<a href="" ng-click="changeClass()">{{showhidetext | translate}} <i class="fa fa-arrow-right"></i></a>
+										<div class="clearfix"></div>
+									</div>
+                                    </div>
+	  							</script>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loan Status Page End -->

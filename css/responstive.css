@@ -1,0 +1,382 @@
+@media (min-width: 768px){
+	.modal-photo-crop-popup {
+		width: 560px;
+		/*width: 672px;*/
+		margin: 0px auto;
+	}
+}
+
+@media screen and (max-width: 1199px) {
+	/*********** Home Page Start ***********/
+	.home-conditional-box > .h-condi-status-box > .h-condi-status h3{
+		font-size: 20px;
+	}
+	
+	/*********** Home Page End ***********/
+
+	/*********** Loan Payment Start ***********/
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status p{
+		/*min-height:44px;*/
+	}
+	
+	/*********** Loan Payment End ***********/
+}
+
+@media screen and (max-width: 991px) {
+	/*********** Home Page Start ***********/
+	.home-conditional-box > .h-condi-status-box > .h-condi-status h3{
+		font-size: 14px;
+	}
+	
+	/*********** Home Page End ***********/
+	
+	/*********** Loan Status Page Start ***********/
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover{
+		width:100%;
+		max-width:600px;
+		margin:0 auto;
+	}
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-date-box, 
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-amt-box{
+		width:50%;
+		float:left;
+	}
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-amt-box{
+		margin:28px 0;
+	}
+	/*********** Loan Status Page End ***********/
+	
+	/*********** Loan Payment Start ***********/
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status h3{
+		/*font-size: 14px;*/
+	}
+	
+	/*********** Loan Payment End ***********/
+}
+@media screen and (max-width: 767px) {
+	/*********** Header Start ***********/
+	header{
+		padding:6px 0;
+	}
+	header > .container-fluid > .row > .loan-heading > .btn-page-back {
+		font-size:20px;
+		padding:11px 15px; 
+	}
+	header > .container-fluid > .row > .loan-heading > h2{
+		font-size:18px;
+		padding:13px 15px;
+	}
+	header > .container-fluid > .row > .header-logo{
+		display:none;
+	}
+	header > .container-fluid > .row > .top-notify-box{
+		padding:14px 15px;
+	}
+	header > .container-fluid > .row > .top-notify-box > .top-notify-list > li > a span{
+		display:none;
+	}
+	.header-cont-mt75{
+		margin-top:120px;
+	}
+	/*********** Header Start ***********/
+	
+	/************* Header Tabs Start ***********/
+	.header-tab-list-box{
+		padding:0;
+		text-align:center;
+		box-shadow:inset 0px 0px 3px rgba(8, 8, 8, 0.23);
+		-moz-box-shadow:inset 0px 0px 3px rgba(8, 8, 8, 0.23);
+		-webkit-box-shadow:inset 0px 0px 3px rgba(8, 8, 8, 0.23);
+		-ms-box-shadow:inset 0px 0px 3px rgba(8, 8, 8, 0.23);
+		-o-box-shadow:inset 0px 0px 3px rgba(8, 8, 8, 0.23);
+	}
+	.header-tab-list-box > .header-tab-list{
+		display:table;
+		width:100%;
+	}
+	.header-tab-list-box > .header-tab-list > li{
+		float:none;
+		display:table-cell;
+	}
+	.header-tab-list-box > .header-tab-list > li > a{
+		padding:10px 20px 6px;
+	}
+	
+	/************* Header Tabs End ***********/
+
+	
+	/*********** Home Page Start ***********/
+	.home-conditional-box{
+		margin:20px 0;
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status{
+		width:33.333%;
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status.last{
+		display:none;
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status p{
+		font-size:16px;
+		font-weight:400;
+		/*min-height:40px;*/
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status h3{
+		font-size:24px;
+	}
+	.bdr0-sm{
+		border-right:none !important;
+	}
+	.home-single-loan{
+		max-width:100%;
+	}
+	/*********** Home Page End ***********/
+	
+	/*********** Loan Payment Page Start ***********/
+	.bg-sm-white{
+		background:#fff;
+		min-height:640px;
+	}
+	.loan-wapper{
+		padding:0;
+	}
+	.loan-status-box > .loan-status-heading{
+		border-bottom:none;
+		padding:15px 30px;
+	}
+	.loan-status-box > .loan-payment-graph-box > .loan-payment-table-box{
+		display:none;
+	}
+	.loan-status-box > .loan-payment-graph-box > .loan-payment-progress canvas{
+		margin:0;
+		max-width:250px;
+	}
+	
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status{
+		width:33.333%;
+		padding:15px;
+	}
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status:first-child{
+		display:none;
+	}
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status p{
+		font-size:16px;
+		font-weight:400;
+
+		/*min-height:40px;*/
+	}
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status h3{
+		font-size:24px;
+	}
+	
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status.last{
+		display:none;
+	}
+	.loan-nxt-rpt-box > .loan-nxt-rpt-heading{
+		border-bottom:none;
+		padding:15px 30px;
+	}
+	.loan-nxt-rpt-box > .loan-nxt-rpt-date-box{
+		margin-top:40px;
+	}
+	/*********** Loan Payment Page End ***********/
+	
+	/************* Loan Pariticipant Page Start ***********/
+	.participant-hire-box .pariticipant-photo-box{
+		margin:25px auto 15px;
+	}
+	.participant-pin-box .btn-pin-change span{
+		display:none;
+	}
+	
+	.pariticipant-photo-2{
+		padding:0;
+	}
+	.pariticipant-photo-2 .participant-heading{
+		border-bottom:1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	.participant-contact-detail-2 .participant-contact-detail-box{
+		border-left:none;
+	}
+	/************* Loan Pariticipant Page End ***********/
+	
+	/************* Login Pages Start ***********/
+	.login-wrapper{
+		padding:0;
+	}
+	.white-login-box{
+		background:none;
+		box-shadow:none;
+		padding:30px 0;
+	}
+	
+	/************* Login Pages End ***********/
+	
+	/************* Contact App Pages Start ***********/
+	.contact-tab{
+		display:block;
+	}
+	.contact-app-box{
+		background:none;
+		box-shadow:none;
+	}
+	.contact-app-in{
+		padding:15px 0;
+	}
+	/************* Contact App Pages End ***********/
+}
+@media screen and (max-width: 650px) {
+	/************* Header Tabs Start ***********/
+	.header-tab-list-box > .header-tab-list > li > a{
+		padding:10px 30px 6px;
+	}
+	.header-tab-list-box > .header-tab-list > li i{
+		padding-right:0;
+	}
+	.header-tab-list-box > .header-tab-list > li span{
+		display:none;
+	}
+	/************* Header Tabs End ***********/
+	
+	/************* Loan Status Start ***********/
+	.loan-status-box > .loan-status-heading h2 span{
+		font-size:16px;
+		float:none;
+	}
+	/************* Loan Status End ***********/
+	
+}
+@media screen and (max-width: 480px) {
+	/************* Header Tabs Start ***********/
+	.header-tab-list-box > .header-tab-list > li > a{
+		padding:10px 25px 6px;
+		text-overflow:ellipsis;
+	}
+	/************* Header Tabs End ***********/
+	/*********** Home Page Start ***********/
+	.home-conditional-box > .h-condi-heading h2{
+		font-size:22px;
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status p{
+		font-size:14px;
+		font-weight:400;
+		/*min-height:40px;*/
+	}
+	.home-conditional-box > .h-condi-status-box > .h-condi-status h3{
+		font-size:16px;
+	}
+	/*********** Home Page ***********/
+	
+	/*********** Loan Status Page ***********/
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status p{
+		font-size:14px;
+		font-weight:400;
+		/*min-height:40px;*/
+	}
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status h3{
+		font-size:16px;
+	}
+	
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-date-box, 
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-amt-box{
+		width:100%;
+	}
+	.loan-nxt-rpt-box > .loan-nxt-rpt-cover > .loan-nxt-rpt-amt-box{
+		margin:0;
+	}
+	/*********** Loan Status Page ***********/
+	
+	/************* Participant Page Start ***********/
+	.participant-heading{
+		padding:15px 20px;
+	}
+	.participant-contact-detail-box h5{
+		padding-left:20px;
+	}
+	.participant-contact-list {
+	   	padding-left: 60px; 
+	}
+	.participant-contact-detail-box{
+		padding:20px 0 0;
+	}
+	.participant-contact-detail-box h5{
+		padding-bottom:15px;
+	}
+	.participant-contact-detail-2{
+		padding:0;
+	}
+	.participant-pin-box{
+		padding:20px;
+	}
+	/************* Participant Page End ***********/
+	
+	/************** Profile Photo Crop Modal Popup Start *************/
+	.profile-photo-crop-cover{
+		padding:20px 0 30px;
+	}
+	.profile-photo-crop-btn-box{
+		margin: 30px 0 10px;
+		padding:0 15px;
+	}
+	.photo-zoom-btn-box{
+		top:auto;
+		right:15px;
+		bottom:15px;
+		margin:0;
+	}
+	/************** Profile Photo Crop Modal Popup End *************/
+}
+@media screen and (max-width: 400px) {
+	/************* Participant Page Start ***********/
+	.editable-input.editable-has-buttons{
+		max-width:120px;
+		width:100%;
+	}
+	.participant-pin-box input[type='password']{
+		width:100%;
+	}
+	.participant-pin-box p span input[type='password']{
+		/*padding:3px 10px;*/
+		width:100%;
+		max-width:150px;
+	}
+	/************* Participant Page End ***********/
+}
+@media screen and (max-width: 355px) {
+	/************* Header Tabs Start ***********/
+	.header-tab-list-box > .header-tab-list > li > a{
+		padding:10px 15px 6px;
+	}
+	/************* Header Tabs End ***********/
+	
+	/************* Participant Page Start ***********/
+	.participant-pin-box p span{
+		/*display:block;
+		padding:0;*/
+		padding-top:5px;
+	}
+	.participant-pin-box p span input[type='password']{
+		/*padding:3px 10px;*/
+		width:100%;
+		max-width:110px;
+	}
+	
+	.editable-wrap{
+		/*white-space:normal !important;*/
+		white-space:nowrap;
+	}
+	/************* Participant Page End ***********/
+	
+	/*********** Home Page Start ***********/
+	.home-conditional-box > .h-condi-status-box > .h-condi-status h3{
+		font-size:14px;
+	}
+	/*********** Home Page ***********/
+	
+	/*********** Loan Status Page ***********/
+	
+	.loan-status-box > .loan-payment-status-box > .loan-payment-status h3{
+		font-size:14px;
+	}
+	/*********** Loan Status Page ***********/
+}

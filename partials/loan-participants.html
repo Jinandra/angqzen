@@ -1,0 +1,617 @@
+	<!-- Header Start -->
+	<div class="wrapper header-bg header-fixed">
+    	<header>
+            <div class="container-fluid">
+                <div class="row">
+                	<div class="top-notify-box" ng-controller="LoginCtrl">
+                    	<ul class="top-notify-list">
+                        	<li><a href="#/support"><i class="fa fa-support"></i> <span translate>Support</span></a></li>
+                            <li><a href="#/{{store[3]}}"  ng-click="logOut()"><i class="fa fa-sign-out"></i> <span translate>Logout</span></a></li><!--href={{navigateto}}}-->
+                        </ul>
+                    </div>
+                	<div class="col-sm-4 col-md-5 loan-heading">
+                    	<a href="#/home" class="btn-page-back"><i class="fa fa-chevron-left"></i></a>
+                    	<h2>{{loanstatus.vehicle}}</h2>
+                    </div>
+                    <div class="col-sm-2 header-logo">
+                    	<a href="{{universalnavigation}}#/home"><img src="img/logo_white.png" alt="Logo"></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+        <div class="header-tab-list-box">
+        	<ul class="header-tab-list">
+            	<li><a href="#/loanstatus"><i class="fa fa-check-circle-o"></i> <span translate>Status</span></a></li>
+                <li class="selected"><a href="#/participants"><i class="fa fa-user"></i> <span translate>PARTICIPANTS</span></a></li>
+                <li><a href="#/payments"><i class="fa fa-university"></i> <span translate>PAYMENTS</span></a></li>
+                <li><a href="#/documents"><i class="fa fa-file-text-o"></i> <span translate>DOCUMENTS</span></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Header End -->
+    
+    <!-- Loan Status Page Start -->
+    <div class="wrapper header-mt120">
+    	<div class="container-fluid">
+        	<div class="loan-wapper" ng-hide="loanParticipants">
+                <div class="row">
+                	<!-- Single Participant Usable class "participant-single" -->
+                    <div class="col-sm-12 col-lg-8 col-lg-offset-2 participant-single" ng-if="userDetails.notEditableUsers.length==0">
+                        <div class="participant-hire-box white-box">
+                        	<div class="col-sm-5 pariticipant-photo-2" ng-controller="ModalDemoCtrl">
+                                <div class="pariticipant-photo-box">
+                                	<div class="pariticipant-photo-in">
+                                        <img ng-if="userDetails.editableUser.Base64ImageString" ng-src="data:image/png;base64, {{userDetails.editableUser.Base64ImageString}}" alt="Photo" width="192">
+                                        <img ng-if="!userDetails.editableUser.Base64ImageString" src="img/avtar_profile.png" alt="Photo" width="192"> 
+                                        <!--data:image/png;base64, {{}}'img/avtar_profile.png'-->
+                                        <div class="photo-uploading-box" ng-class="{'active': uploading}">
+                                            <h2>UPLOADING</h2>
+                                            
+                                            <div class="uploading-effect-zoomin" ng-class="{'active': uploading}"></div>
+
+                                            <!--<div class="uploading-effect-circle-1"></div>
+                                            <div class="uploading-effect-circle-2"></div>-->
+                                        </div>
+                                    </div>
+                                    <div class="btn-camera" ng-class="{'camera-disabled': uploading}"><i class="fa fa-camera"></i>
+                                        <input type="file" ng-model='userPhoto' name="userPhoto" base-sixty-four-input  onload="uploadPhoto" accept="image/*"/>
+                                    </div>
+                                </div>
+                                <div class="participant-heading">
+                                    <h2>{{userDetails.editableUser.Name +" "+userDetails.editableUser.SurName}} <span ng-bind="userDetails.editableUser.Role | translate"></span></h2>
+                                </div>
+                            </div>
+                            <div class="col-sm-7 participant-contact-detail-2">
+                                <div class="participant-contact-detail-box">
+                                    <h5 translate>Contact details</h5>
+                                    <ul class="participant-contact-list">
+                                        <li><p><span class="icon-box contact-envelope"><i
+                                                class="fa fa-envelope"></i></span></p>
+                                            <div class="icon-box participant-address-box">
+                                                <a ng-href="mailto:{{userDetails.editableUser.Email}}" e-required
+                                                   editable-email="userDetails.editableUser.Email"
+                                                   onbeforesave="updateDetails($data, 'Email')"
+                                                   ng-bind="userDetails.editableUser.Email || 'empty' |translate"
+                                                   onshow="showBtn('Email')"></a>
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Email" ng-show="showMethod.Email">
+                                                    <div ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40" >
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Email</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40">
+                                                            <i class="fa fa-warning"></i> <span translate>Incorrect Email</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-moblie"><i class="fa fa-mobile-phone"></i></span>
+                                            </p>
+                                            <div class="participant-address-box">
+                                              <!--  <p editable-tel="userDetails.editableUser.Mobile" e-mobile-input
+                                                   e-required
+                                                   e-ng-attr-placeholder="{{mobNumbplaceholder || 'Mobile Phone' |translate}}"
+                                                   e-mob-number-placeholder e-ng-focus="focus2()"
+                                                   e-placeholder="(+__) ___ ___________"
+                                                   onbeforesave="updateDetails($data, 'Mobile')"
+                                                   e-title="(+xx) xxx xxxxxxxx"
+                                                   ng-bind="userDetails.editableUser.Mobile || 'empty' | translate"
+                                                   e-mobile-input
+                                                   onshow="showBtn('Mobile')">
+                                                    &lt;!&ndash;   e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/"&ndash;&gt;
+                                                </p>-->
+                                                <p editable-tel="userDetails.editableUser.Mobile"
+                                                   e-required
+                                                   onbeforesave="$data = fullMobileNumber || $data;;updateDetails(fullMobileNumber, 'Mobile')"
+                                                   ng-bind="userDetails.editableUser.Mobile || 'empty' | translate"
+                                                   onshow="showBtn('Mobile')"
+                                                   e-international-phone-number
+                                                   e-only-countries="ca, es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, pk, br, at"
+                                                   e-default-country="auto"
+                                                   e-preferred-countries="ca, es, pt, at, gb"
+                                                   e-full-phone-number="fullMobileNumber">
+                                                    <!--e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/"-->
+                                                </p>
+                                                <!--e-pattern="\d{0}\+\d{2}\d{3}\d{3}\d{3}"-->
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Mobile" ng-show="showMethod.Mobile">
+                                                    <div  ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40" >
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Mobile</span>
+                                                        </button>
+                                                    </div>
+                                                    <div  ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40" >
+                                                            <i class="fa fa-warning"></i> <span translate>Incorrect Mobile</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-phone"><i class="fa fa-phone"></i></span>
+                                            </p>
+
+                                            <div class="participant-address-box">
+                                              <!--  <p editable-tel="userDetails.editableUser.Phone" e-required
+                                                   e-mobile-input
+                                                   e-ng-attr-placeholder="{{mobNumbplaceholder || 'Phone'|translate}}"
+                                                   e-mob-number-placeholder e-ng-focus="focus2()"
+                                                   e-placeholder="(+__) ___ ___________" e-title="(+xx) xxx xxxxxxxx"
+                                                   onbeforesave="updateDetails($data, 'Phone')"
+                                                   ng-bind="userDetails.editableUser.Phone || 'empty' | translate "
+                                                   onshow="showBtn('Phone')"></p>-->
+                                                <p editable-tel="userDetails.editableUser.Phone"
+                                                   e-required
+                                                   onbeforesave="$data = fullPhoneNumber || $data;updateDetails(fullPhoneNumber, 'Phone')"
+                                                   ng-bind="userDetails.editableUser.Phone || 'empty' | translate"
+                                                   onshow="showBtn('Phone')"
+                                                   e-international-phone-number
+                                                   e-only-countries="ca, es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, br, at"
+                                                   e-default-country="auto"
+                                                   e-preferred-countries="ca, es, pt, at, gb"
+                                                   e-full-phone-number="fullPhoneNumber">
+                                                </p>
+                                                <!--  e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/" -->
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Phone" ng-show="showMethod.Phone">
+                                                    <div  ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40">
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Phone</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40">
+                                                            <i class="fa fa-warning"></i> <span translate>Incorrect Phone</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- Address Normal Start -->
+                                        <li><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span><span ng-bind="userDetails.editableUser.Street1 || 'empty' | translate"></span></p>
+                                            <p ng-bind="userDetails.editableUser.Postcode || 'empty' | translate"></p>
+                                            <p ng-bind="userDetails.editableUser.City || 'empty' | translate "></p>
+
+                                        </li>
+                                        <!-- Address Normal End -->
+                                        <li style="display: none"><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span></p>
+                                        	<div class="participant-address-box">
+                                                <form editable-form name="editableForm" onaftersave="saveUser($data)"  onshow="showBtn('Address')">
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Street1" e-required e-name="Street1" e-placeholder="{{'Address' | translate}}" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" ng-bind="userDetails.editableUser.Street1 || 'empty' | translate"></p>
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Street2" e-required e-name="Street2"  ng-click="editableForm.$show()" ng-show="!editableForm.$visible" ng-bind="', ' + userDetails.editableUser.Street2 || 'empty' | translate"></p>
+                                                      	<div class="clearfix"></div>
+
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Postcode" e-required e-name="Postcode" e-placeholder="{{'Post Code' | translate}}" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" ng-bind="userDetails.editableUser.Postcode || 'empty' | translate"></p>
+                                                    <div class="clearfix"></div>
+
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.City" e-required e-name="City" e-placeholder="{{'City' | translate}}" ng-click="editableForm.$show()" ng-show="!editableForm.$visible" ng-bind="userDetails.editableUser.City || 'empty' | translate "></p>
+                                                    <div class="clearfix"></div>
+
+                                                    <!-- buttons to submit / cancel form -->
+                                                    <span ng-show="editableForm.$visible">
+                                                        <button type="submit" class="btn btn-primary m0" ng-disabled="editableForm.$waiting">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </span>
+
+                                                    <div ng-switch on="contactAddress" ng-show="showMethod.Address">
+                                                        <div ng-switch-when="success">
+                                                            <button type="button" class="btn-green btn-h40">
+                                                                <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                            </button>
+                                                        </div>
+                                                        <div ng-switch-when="loading">
+                                                            <button type="button" class="loading-h40">
+                                                                <i class="fa fa-spinner fa-pulse"></i><span translate> Changing Address</span>
+                                                            </button>
+                                                        </div>
+                                                        <div ng-switch-when="error">
+                                                            <button type="button" class="btn-red btn-h40">
+                                                                <i class="fa fa-warning"></i> <span translate>Incorrect Address</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="participant-pin-box" ng-controller="PinChangeCtrl">
+                                        <!--<p>PIN Code<span class="pdl15"> <input type="password" value="{{loanstatus.PinCode}}" disabled="disabled" e-name="password" e-type="password" e-form="textBtnForm"></span></p>
+                                        <button type="button" class="btn-pin-change" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><span>Change Pin</span> <i class="fa fa-pencil"></i></button>-->
+                                        <form name="PinChangeForm" novalidate>
+                                        	<div class="pin-chang" ng-show="PinchangeBtn">
+                                        		<p><span translate>PIN Code</span><span class="pdl15"> <input type="password" value="{{userDetails.editableUser.Pin}}" disabled="disabled" name="password" ></span></p>
+                                        		<button type="button" class="btn-pin-change" ng-click="PinBtnSwitch()"><span translate>Change Pin</span> <i class="fa fa-pencil"></i></button>
+                                            </div>
+                                        	<div class="pin-reset-box" ng-hide="PinchangeFormShow">
+
+                                                <div class="pin-reset-opt">
+                                                    <label for="newPin" translate>New PIN</label>
+                                                    <input type="password" class="form-control" ng-pattern="/^\d+$/" id="newPin" name="newPin" ng-model="Pin.new" ng-minlength="6" ng-maxlength="12" required />
+                                                    <div class="error" ng-show="PinChangeForm.newPin.$dirty && PinChangeForm.newPin.$invalid" translate>
+                                                        Please enter a new pin. It must be in Numeric at least 6 characters long.
+                                                    </div>
+                                                </div>
+                                                <div class="pin-reset-opt">
+                                                    <label for="newPinConfirm" translate>Confirm PIN</label>
+                                                    <input type="password" class="form-control" name="newPinConfirm" ng-pattern="/^\d+$/" id="newPinConfirm" ng-model="Pin.confirm" ng-minlength="6" validation-check="Pin.confirm == Pin.new" required />
+                                                    <div class="error" ng-show="PinChangeForm.newPinConfirm.$dirty && PinChangeForm.newPinConfirm.$invalid" translate>
+                                                        Please enter the same new pin.
+                                                    </div>
+                                                </div>
+
+                                                <div class="pin-reset-opt" ng-switch on="pinChange">
+                                                    <span ng-switch-when="submit">
+                                                	<button type="submit" class="btn btn-primary" ng-click="PinSaveSwitch()"  ng-disabled="PinChangeForm.$invalid" translate>
+                                                    	Save Pin
+                                                    </button>
+                                                    <button type="button"  class="btn btn-default" ng-click="PinCancelSwitch()">
+                                                    	<i class="fa fa-times"></i>
+                                                    </button>
+                                                    </span>
+                                                    <span ng-switch-when="success">
+                                                    <button type="button" class="btn-green btn-h40"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button>
+                                                    </span>
+                                                    <span ng-switch-when="loading">
+                                                        <div class="loading loading-h40">
+                                                            <p><i class="fa fa-spinner fa-pulse"></i> Changing pin number</p>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!--<div class="participant-save-box">
+                                        <button type="button" ng-show="editDisable" class="btn-save-graye">Save</button>
+                                        <button type="button" ng-hide="editDisable" ng-click="switchEditSave()" class="btn-save-red">Save</button>
+                                        <div class="clearfix"></div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <!--Participant with Guarantor Usable class "participant-wth-guarantor" -->
+                    <div class="participant-wth-guarantor" ng-if="userDetails.notEditableUsers.length>0">
+                        <div class="col-sm-6 col-lg-4 col-lg-offset-2">
+                            <div class="participant-hire-box white-box">
+                                <div class="pariticipant-photo-box">
+                                    <div class="pariticipant-photo-in">
+                                        <img ng-if="userDetails.editableUser.Base64ImageString" ng-src="data:image/png;base64, {{userDetails.editableUser.Base64ImageString}}" alt="Photo" width="192">
+                                        <img ng-if="!userDetails.editableUser.Base64ImageString" src="img/avtar_profile.png" alt="Photo" width="192">
+                                        <!--data:image/png;base64, {{}}'img/avtar_profile.png'-->
+                                        <div class="photo-uploading-box" ng-class="{'active': uploading}">
+                                            <h2>UPLOADING</h2>
+                                            
+                                            <div class="uploading-effect-zoomin" ng-class="{'active': uploading}"></div>
+
+                                            <!--<div class="uploading-effect-circle-1"></div>
+                                            <div class="uploading-effect-circle-2"></div>-->
+                                        </div>
+                                    </div>
+                                    <div class="btn-camera" ng-class="{'camera-disabled': uploading}"><i class="fa fa-camera"></i>
+                                        <input type="file" ng-model='userPhoto' name="userPhoto" base-sixty-four-input  onload="uploadPhoto" accept="image/*"/>
+                                    </div>
+                                </div>
+    
+                                <div class="participant-heading">
+                                    <h2>{{userDetails.editableUser.Name +" "+userDetails.editableUser.SurName}} <span ng-bind="userDetails.editableUser.Role | translate"></span></h2>
+                                </div>
+                                <div class="participant-contact-detail-box">
+                                    <h5 translate>Contact details</h5>
+                                    <!--<ul class="participant-contact-list">
+                                        <li><p><span class="icon-box contact-envelope"><i
+                                                class="fa fa-envelope"></i></span> <a ng-href="mailto:{{userDetails.editableUser.Email}}" 
+                                                   ng-bind="userDetails.editableUser.Email || 'empty' |translate"></a></p>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-moblie"><i class="fa fa-mobile-phone"></i></span><span ng-bind="userDetails.editableUser.Mobile || 'empty' | translate"></span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-phone"><i class="fa fa-phone"></i></span><span ng-bind="userDetails.editableUser.Phone || 'empty' | translate "></span>
+                                            </p>
+                                        </li>
+                                        <li><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span><span ng-bind="userDetails.editableUser.Street1 || 'empty' | translate"></span></p>
+                                            <p ng-bind="userDetails.editableUser.Postcode || 'empty' | translate"></p>                                                    
+                                            <p ng-bind="userDetails.editableUser.City || 'empty' | translate "></p>
+                                            
+                                        </li>
+                                    </ul>-->
+                                    
+                                    <ul class="participant-contact-list">
+                                        <li><p><span class="icon-box contact-envelope"><i
+                                                class="fa fa-envelope"></i></span></p>
+                                            <div class="icon-box participant-address-box">
+                                                <a ng-href="mailto:{{userDetails.editableUser.Email}}" e-required
+                                                   editable-email="userDetails.editableUser.Email"
+                                                   onbeforesave="updateDetails($data, 'Email')"
+                                                   ng-bind="userDetails.editableUser.Email || 'empty' |translate"
+                                                   onshow="showBtn('Email')"></a>
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Email" ng-show="showMethod.Email">
+                                                    <div ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40">
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Email</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40">
+                                                            <i class="fa fa-warning"></i> <span translate>Incorrect Email</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-moblie"><i class="fa fa-mobile-phone"></i></span>
+                                            </p>
+                                            <div class="participant-address-box">
+                                                <!--<p editable-tel="userDetails.editableUser.Mobile" e-mobile-input
+                                                   e-required
+                                                   e-ng-attr-placeholder="{{mobNumbplaceholder || 'Mobile Phone' | translate}}"
+                                                   e-mob-number-placeholder e-ng-focus="focus2()"
+                                                   e-placeholder="(+__) ___ ___________"
+                                                   onbeforesave="updateDetails($data, 'Mobile')"
+                                                   e-title="(+xx) xxx xxxxxxxx"
+                                                   ng-bind="userDetails.editableUser.Mobile || 'empty' | translate"
+                                                   e-mobile-input
+                                                   onshow="showBtn('Mobile')">
+                                                     &lt;!&ndash;e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/"&ndash;&gt;
+                                                    &lt;!&ndash;e-pattern="\d{0}\+\d{2}\d{3}\d{3}\d{3}"&ndash;&gt;
+                                                </p>-->
+                                                <p editable-tel="userDetails.editableUser.Mobile"
+                                                   e-required
+                                                   onbeforesave="$data = fullMobileNumber || $data; updateDetails($data, 'Mobile');"
+                                                   ng-bind="userDetails.editableUser.Mobile || 'empty' | translate"
+                                                   onshow="showBtn('Mobile')"
+                                                   e-international-phone-number
+                                                   e-only-countries="ca, es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, br, at"
+                                                   e-default-country="auto"
+                                                   e-preferred-countries="ca, es, pt, at, gb"
+                                                   e-full-phone-number="fullMobileNumber"
+                                                        e-name="mobile" >
+                                                    <!--e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/"-->
+                                                    {{$form}}
+    
+                                                </p>
+    
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Mobile" ng-show="showMethod.Mobile" >
+                                                    <div  ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40" >
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Mobile</span>
+                                                        </button>
+                                                    </div>
+                                                    <div  ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40" >
+                                                            <i class="fa fa-warning"></i><span translate> Incorrect Mobile</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <p><span class="icon-box contact-phone"><i class="fa fa-phone"></i></span>
+                                            </p>
+    
+                                            <div class="participant-address-box">
+                                               <!-- <p editable-tel="userDetails.editableUser.Phone" e-required
+                                                   e-mobile-input
+                                                   e-ng-attr-placeholder="{{mobNumbplaceholder || 'Phone' | translate}}"
+                                                   e-mob-number-placeholder e-ng-focus="focus2()"
+                                                   e-placeholder="(+__) ___ ___________" e-title="(+xx) xxx xxxxxxxx"
+                                                   onbeforesave="updateDetails($data, 'Phone')"
+                                                   ng-bind="userDetails.editableUser.Phone || 'empty' | translate "
+                                                   onshow="showBtn('Phone')" ></p>-->
+                                                <p editable-tel="userDetails.editableUser.Phone"
+                                                   e-required
+                                                   onbeforesave="$data = fullPhoneNumber || $data;updateDetails(fullPhoneNumber, 'Phone')"
+                                                   ng-bind="userDetails.editableUser.Phone || 'empty' | translate"
+                                                   onshow="showBtn('Phone')"
+                                                   e-international-phone-number
+                                                   e-only-countries="ca, es, pt, pl, gb, us, cl, ua, no, fi, se, it, fr, cn, pk, br, at"
+                                                   e-default-country="auto"
+                                                   e-preferred-countries="ca, es, pt, at, gb"
+                                                   e-full-phone-number="fullPhoneNumber">
+                                                </p>
+                                                <!--e-ng-pattern="/^\d{2}\d{3}\d{3}\d{4}?$/"-->
+                                                <div class="clearfix"></div>
+                                                <div ng-switch on="contact.Phone" ng-show="showMethod.Phone">
+                                                    <div  ng-switch-when="success">
+                                                        <button type="button" class="btn-green btn-h40">
+                                                            <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="loading">
+                                                        <button type="button" class="loading-h40" >
+                                                            <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Phone</span>
+                                                        </button>
+                                                    </div>
+                                                    <div ng-switch-when="error">
+                                                        <button type="button" class="btn-red btn-h40">
+                                                            <i class="fa fa-warning"></i> <span translate>Incorrect Phone</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- Address Normal Start -->
+                                        <li><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span><span ng-bind="userDetails.editableUser.Street1 || 'empty' | translate"></span></p>
+                                            <p ng-bind="userDetails.editableUser.Postcode || 'empty' | translate"></p>                                                    
+                                            <p ng-bind="userDetails.editableUser.City || 'empty' | translate "></p>
+                                            
+                                        </li>
+                                        <!-- Address Normal End -->
+                                        
+                                        <!-- Address Editable Start -->
+                                        <li style="display:none"><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span></p>
+                                            <div class="participant-address-box">
+                                                <form editable-form name="editableForm2" onaftersave="saveUser($data)"  onshow="showBtn('Address')">
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Street1" e-required e-name="Street1" e-placeholder="{{'Address'|translate}}" ng-click="editableForm2.$show()" ng-show="!editableForm2.$visible" ng-bind="userDetails.editableUser.Street1 || 'empty' | translate"></p>
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Street2" e-required e-name="Street2" ng-click="editableForm2.$show()" ng-show="!editableForm2.$visible" ng-bind="', ' +userDetails.editableUser.Street2 || 'empty' | translate"></p>
+                                                    <div class="clearfix"></div>
+                                                
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.Postcode" e-required e-name="Postcode" e-placeholder="{{'Post Code' | translate}}" ng-click="editableForm2.$show()" ng-show="!editableForm2.$visible" ng-bind="userDetails.editableUser.Postcode || 'empty' | translate"></p>
+                                                    <div class="clearfix"></div>
+                                                
+                                                    <p class="editable-click" editable-text="userDetails.editableUser.City" e-required e-name="City" e-placeholder="{{'City' | translate}}" ng-click="editableForm2.$show()" ng-show="!editableForm2.$visible" ng-bind="userDetails.editableUser.City || 'empty' | translate "></p>
+                                                    <div class="clearfix"></div>
+                                                
+                                                    <!--buttons to submit / cancel form-->
+                                                    <span ng-show="editableForm2.$visible">
+                                                        <button type="submit" class="btn btn-primary m0" ng-disabled="editableForm2.$waiting">
+                                                            <i class="fa fa-check"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-default" ng-disabled="editableForm2.$waiting" ng-click="editableForm2.$cancel()">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </span>
+    
+                                                    <div ng-switch on="contactAddress" ng-show="showMethod.Address">
+                                                        <div ng-switch-when="success"><!--&lt;&macr; ng-show="successForm" &lt;&macr;-->
+                                                            <button type="button" class="btn-green btn-h40">
+                                                                <i class="fa fa-check-circle"></i><span translate>Saved!</span>
+                                                            </button>
+                                                        </div>
+                                                        <div ng-switch-when="loading"><!--&lt;&macr; ng-show="loadingForm" &lt;&macr;-->
+                                                            <button type="button" class="loading-h40">
+                                                                <i class="fa fa-spinner fa-pulse"></i> <span translate>Changing Address</span>
+                                                            </button>
+                                                        </div>
+                                                        <div ng-switch-when="error"><!--&lt;&macr; ng-show="errorForm" &lt;&macr;-->
+                                                            <button type="button" class="btn-red btn-h40">
+                                                                <i class="fa fa-warning"></i> <span translate>Incorrect Address</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>  
+                                            </div>
+                                        </li>
+                                        <!-- Address Editable End -->
+                                    </ul>
+                                   
+                                    <div class="participant-pin-box" ng-controller="PinChangeCtrl">
+                                        <!--<p>PIN Code<span class="pdl15"> <input type="password" value="{{loanstatus.PinCode}}" disabled="disabled" e-name="password" e-type="password" e-form="textBtnForm"></span></p>
+                                        <button type="button" class="btn-pin-change" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><span>Change Pin</span> <i class="fa fa-pencil"></i></button>-->
+                                        <form name="PinChangeForm" novalidate>
+                                            <div class="pin-chang" ng-show="PinchangeBtn">
+                                                <p><span translate>PIN Code</span><span class="pdl15"> <input type="password" value="{{userDetails.editableUser.Pin}}" disabled="disabled" name="password" ></span></p>
+                                                <button type="button" class="btn-pin-change" ng-click="PinBtnSwitch()"><span translate>Change Pin</span> <i class="fa fa-pencil"></i></button>
+                                            </div>
+                                            <div class="pin-reset-box" ng-hide="PinchangeFormShow">
+    
+                                                <div class="pin-reset-opt">
+                                                    <label for="newPin" translate>New PIN</label>
+                                                    <input type="password" class="form-control" ng-pattern="/^\d+$/" id="newPin" name="newPin" ng-model="Pin.new" ng-minlength="6" required />
+                                                    <div class="error" ng-show="PinChangeForm.newPin.$dirty && PinChangeForm.newPin.$invalid" translate>
+                                                        Please enter a new pin. It must be in Numeric at least 6 characters long.
+                                                    </div>
+                                                </div>
+                                                <div class="pin-reset-opt">
+                                                    <label for="newPinConfirm" translate>Confirm PIN</label>
+                                                    <input type="password" class="form-control" name="newPinConfirm" ng-pattern="/^\d+$/" id="newPinConfirm" ng-model="Pin.confirm" ng-minlength="6" validation-check="Pin.confirm == Pin.new" required />
+                                                    <div class="error" ng-show="PinChangeForm.newPinConfirm.$dirty && PinChangeForm.newPinConfirm.$invalid" translate>
+                                                        Please enter the same new pin.
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="pin-reset-opt" ng-switch on="pinChange">
+                                                    <span ng-switch-when="submit">
+                                                    <button type="submit" class="btn btn-primary" ng-click="PinSaveSwitch()"  ng-disabled="PinChangeForm.$invalid" translate>
+                                                        Save Pin
+                                                    </button>
+                                                    <button type="button"  class="btn btn-default" ng-click="PinCancelSwitch();">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </span>
+                                                    <span ng-switch-when="success">
+                                                    <button type="button" class="btn-green btn-h40"><i class="fa fa-check-circle"></i><span translate>Saved!</span></button>
+                                                    </span>
+                                                    <span ng-switch-when="loading">
+                                                        <div class="loading loading-h40">
+                                                            <p><i class="fa fa-spinner fa-pulse"></i> <span translate>Changing pin number</span></p>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    <!--<div class="participant-save-box">
+                                        <button type="button" ng-show="editDisable" class="btn-save-graye">Save</button>
+                                        <button type="button" ng-hide="editDisable" ng-click="switchEditSave()" class="btn-save-red">Save</button>
+                                        <div class="clearfix"></div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="participant-hire-box white-box" ng-repeat="notEditableUser in userDetails.notEditableUsers" ><!--ng-if="userDetails.notEditableUser"-->
+                                <form>
+                                    <div class="participant-heading">
+                                        <h2>{{notEditableUser.Name +" "+notEditableUser.SurName}}<span ng-bind="notEditableUser.Role | translate" ></span></h2>
+                                    </div>
+                                    <div class="participant-contact-detail-box">
+                                        <h5 translate>Contact details</h5>
+                                        <ul class="participant-contact-list">
+                                            <li><p><span class="icon-box contact-envelope"><i class="fa fa-envelope"></i></span> <a ng-href="mailto:{{notEditableUser.Email}}" ng-if="notEditableUser.Email" ng-bind="notEditableUser.Email"></a>
+                                                <span ng-if="!notEditableUser.Email" ng-bind="'empty' | translate"></span></p></li>
+                                            <li><p><span class="icon-box contact-moblie"><i class="fa fa-mobile-phone"></i></span> <span ng-bind="notEditableUser.Mobile || 'empty' | translate"></span></p></li>
+                                            <li><p><span class="icon-box contact-phone"><i class="fa fa-phone"></i></span> <span ng-bind="notEditableUser.Phone || 'empty' | translate"></span></p></li>
+                                            <li><p><span class="icon-box contact-home"><i class="fa fa-home"></i></span><span ng-bind="notEditableUser.Street1 || 'empty' | translate"></span></p>
+                                                <p ng-bind="notEditableUser.Postcode || 'empty' | translate"></p>
+                                                <p ng-bind="notEditableUser.City || 'empty' | translate"></p>
+                                            </li>
+                                        </ul>
+                                                                           
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Loan Status Page End -->

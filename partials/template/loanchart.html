@@ -1,0 +1,36 @@
+<div class="col-md-8 loan-payment-table-box">
+    <table class="table loan-payment-table">
+        <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>I</th>
+            <th>II</th>
+            <th>III</th>
+            <th>IV</th>
+            <th>V</th>
+            <th>VI</th>
+            <th>VII</th>
+            <th>VIII</th>
+            <th>IX</th>
+            <th>X</th>
+            <th>XI</th>
+            <th>XII</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="year in years">
+            <th>{{year}}</th>
+            <td ng-repeat="month in [] | range:12">
+                <div ng-repeat="SettlementItem in matrix"
+                     ng-if="SettlementItem.SettlementDate.getFullYear()==year && SettlementItem.SettlementDate.getMonth()==month"
+                     ng-class="{
+                                  'payment-not':SettlementItem.SettlementStatus==0,
+                                  'payment-successfull':SettlementItem.SettlementStatus==1,
+                                  'payment-exception':SettlementItem.SettlementStatus==2
+								}"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="clearfix"></div>
+</div>

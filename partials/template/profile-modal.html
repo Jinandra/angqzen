@@ -1,0 +1,32 @@
+<div class="profile-photo-crop-cover">
+	<h2>Crop your photo</h2>
+    <div class="profile-photo-crop-box">
+            <image-crop
+                    height="300"
+                    width="300"
+                    shape="circle"
+                    step="imageCropStep"
+                    src="'data:image/png;base64, '+base64ImageString"
+                    result="imageCropResult"
+                    result-blob="resultBlob"
+                    crop="initCrop"
+                    padding="100"
+                ></image-crop>
+
+
+        <!-- <div class="photo-zoom-btn-box">
+             <button class="btn-white-circle" ng-click="zoomOut()"><i class="fa fa-search-minus"></i></button>
+             <button class="btn-white-circle" ng-click="zoomIn()"><i class="fa fa-search-plus"></i></button>
+         </div>-->
+
+
+    </div>
+    <div class="profile-photo-crop-btn-box">
+        <button class="btn-camera-upload" ><i class="fa fa-camera"></i>
+            <input type="file" ng-model='userPhoto' name="userPhoto" base-sixty-four-input  onload="uploadPhoto" accept="image/*"/>
+        </button>
+
+        <button class="btn-graye" ng-click="cancel()">Cancel</button>
+        <button class="btn-red pull-right" ng-click="initCrop = true;">Save</button>
+    </div>
+</div>
